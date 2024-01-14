@@ -81,15 +81,26 @@ const form = reactive({
   prompt: '',
   steps: 10,
   batch_size: 2, //每次张数
-  init_images: []
+  init_images: [],
+  width: 512,
+  height: 512
 })
 
 function sure() {
+  let setBG = false
+  const workspace = canvasEditor.canvas.getObjects().find((item) => item.id === 'workspace');
+  console.log(workspace);
+  form.width = workspace.width
+  form.height = workspace.height
+
   loadingShow.value = true
-  setColor('rgba(0,0,0,0)')
+  if (workspace.fill === 'rgba(255,255,255,1)') {
+    setBG = true
+    setColor('rgba(0,0,0,0)')
+  }
   canvasEditor.preview().then((dataUrl) => {
     // const dataUrl = getImgUrl();
-    setColor('rgba(255,255,255,1)')
+    setBG && setColor('rgba(255,255,255,1)')
     form.init_images[0] = dataUrl
 
     axios.post(`${url}/sdapi/v1/img2img`, {
