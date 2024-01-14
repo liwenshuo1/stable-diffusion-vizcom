@@ -86,9 +86,10 @@ const form = reactive({
 
 function sure() {
   loadingShow.value = true
+  setColor('rgba(0,0,0,0)')
   canvasEditor.preview().then((dataUrl) => {
     // const dataUrl = getImgUrl();
-
+    setColor('rgba(255,255,255,1)')
     form.init_images[0] = dataUrl
 
     axios.post(`${url}/sdapi/v1/img2img`, {
@@ -105,6 +106,14 @@ function sure() {
     console.log(dataUrl);
 
   });
+
+  // 背景颜色设置
+  function setColor(color) {
+    const workspace = canvasEditor.canvas.getObjects().find((item) => item.id === 'workspace');
+    workspace.set('fill', color);
+    canvasEditor.canvas.renderAll();
+  }
+
 }
 
 </script>
