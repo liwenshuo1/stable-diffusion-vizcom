@@ -345,15 +345,19 @@ onMounted(() => {
     flex: 1;
     text-align: center;
     padding: 5px 0;
-    background: #f6f6f6;
+    background: var(--bg-color);
     margin-left: 2px;
     cursor: pointer;
 
+    svg {
+      fill: var(--font-color);
+    }
+
     &:hover {
-      background: #edf9ff;
+      background: var(--bg-color);
 
       svg {
-        fill: #2d8cf0;
+        fill: #4c4ce6;
       }
     }
   }

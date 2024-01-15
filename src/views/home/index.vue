@@ -302,7 +302,7 @@ provide('canvasEditor', canvasEditor);
 .left-bar {
   width: 65px;
   height: 100%;
-  background: #fff;
+  background: var(--bg-color);
   display: flex;
   position: relative;
   justify-content: center;
@@ -318,7 +318,7 @@ provide('canvasEditor', canvasEditor);
   height: 100%;
   padding: 10px;
   overflow-y: auto;
-  background: #fff // width: 240px;
+  background: var(--bg-color) // width: 240px;
     // height: 100%;
     // padding: 10px;
     // overflow-y: auto;
@@ -384,8 +384,8 @@ provide('canvasEditor', canvasEditor);
 :deep(.ivu-layout-header) {
   --height: 45px;
   padding: 0 10px;
-  border-bottom: 1px solid #eef2f8;
-  background: #fff;
+  // border-bottom: 1px solid #eef2f8;
+  background: var(--bg-color);
   height: var(--height);
   line-height: var(--height);
 }
@@ -393,6 +393,7 @@ provide('canvasEditor', canvasEditor);
 .home,
 .ivu-layout {
   height: 100vh;
+  background-color: #151517;
 }
 
 .icon {
