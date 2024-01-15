@@ -79,7 +79,7 @@ const prompt = ref('')
 const loadingShow = ref(false)
 const form = reactive({
   prompt: '',
-  steps: 10,
+  steps: 20,
   batch_size: 2, //每次张数
   init_images: [],
   width: 512,
@@ -94,6 +94,22 @@ function sure() {
   form.height = workspace.height
 
   loadingShow.value = true
+  if (canvasEditor.canvas.getObjects().length === 1) {
+    axios.post(`${url}/sdapi/v1/txt2img`, {
+      ...form
+    }).then(res => {
+      console.log('res, rees', res);
+      loadingShow.value = false
+      const imgArr = res.data.images.map(item => `data:image/png;base64,${item}`)
+      ImagePreview.show({
+        // previewList: [`data:image/png;base64,${res.data.images[0]}`],
+        previewList: imgArr
+      });
+    })
+    return
+  }
+
+
   if (workspace.fill === 'rgba(255,255,255,1)') {
     setBG = true
     setColor('rgba(0,0,0,0)')
